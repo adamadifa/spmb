@@ -1,0 +1,80 @@
+/* Login Page Styles */
+.login-container {
+    @apply min-h-screen flex flex-col lg:flex-row;
+}
+
+.login-left-column {
+    @apply lg:flex-1 relative hidden lg:block;
+}
+
+.login-background {
+    @apply absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700;
+}
+
+.login-overlay {
+    @apply absolute inset-0 bg-black/40;
+}
+
+.login-background-image {
+    @apply absolute inset-0 bg-cover bg-center mix-blend-overlay;
+}
+
+.login-welcome-content {
+    @apply relative h-full flex flex-col justify-center px-12 py-24;
+}
+
+.login-welcome-card {
+    @apply bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-lg mx-auto;
+}
+
+.login-right-column {
+    @apply flex-1 flex items-center justify-center p-8 lg:p-12 bg-white;
+}
+
+.login-form-container {
+    @apply w-full max-w-md;
+}
+
+.login-logo {
+    @apply inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 mb-4;
+}
+
+.login-input-group {
+    @apply space-y-2;
+}
+
+.login-input-wrapper {
+    @apply relative;
+}
+
+.login-input-icon {
+    @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
+}
+
+.login-input {
+    @apply block w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm;
+}
+
+.login-button {
+    @apply w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+}
+
+.login-divider {
+    @apply relative flex py-5;
+}
+
+.login-divider-line {
+    @apply absolute inset-0 flex items-center;
+}
+
+.login-divider-text {
+    @apply relative flex justify-center text-sm;
+}
+
+.login-checkbox {
+    @apply h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded;
+}
+
+.login-link {
+    @apply text-sm font-medium text-blue-600 hover:text-blue-500;
+} 
