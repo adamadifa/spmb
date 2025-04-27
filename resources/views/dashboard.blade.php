@@ -83,11 +83,9 @@
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-800">Grafik Pendaftaran</h3>
                 <div class="flex space-x-2">
-                    <button
-                        class="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">Minggu</button>
+                    <button class="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">Minggu</button>
                     <button class="px-3 py-1 text-xs font-medium text-white bg-primary-dark rounded-md">Bulan</button>
-                    <button
-                        class="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">Tahun</button>
+                    <button class="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">Tahun</button>
                 </div>
             </div>
             <div class="h-80 bg-gray-50 rounded-lg flex items-center justify-center">
@@ -104,8 +102,7 @@
             <div class="space-y-4">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
-                        <div
-                            class="w-8 h-8 rounded-full bg-primary-light/10 text-primary-dark flex items-center justify-center">
+                        <div class="w-8 h-8 rounded-full bg-primary-light/10 text-primary-dark flex items-center justify-center">
                             <i class="fas fa-user-plus"></i>
                         </div>
                     </div>
@@ -141,8 +138,7 @@
 
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
-                        <div
-                            class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-500 flex items-center justify-center">
+                        <div class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-500 flex items-center justify-center">
                             <i class="fas fa-exclamation-triangle"></i>
                         </div>
                     </div>
@@ -165,23 +161,17 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.
                             Register</th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
                         </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Program Studi</th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status</th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Tanggal Daftar</th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi
                         </th>
                     </tr>
                 </thead>
@@ -191,8 +181,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ahmad Fadillah</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Teknik Informatika</td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Menunggu</span>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Menunggu</span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">12 Juni 2023</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -205,8 +194,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Siti Nurhaliza</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Manajemen</td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Lengkap</span>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Lengkap</span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">11 Juni 2023</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -219,8 +207,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rudi Hartono</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Akuntansi</td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Diterima</span>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Diterima</span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10 Juni 2023</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -233,8 +220,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dewi Sartika</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Psikologi</td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Revisi</span>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Revisi</span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">9 Juni 2023</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
