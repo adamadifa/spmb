@@ -21,22 +21,25 @@
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                            50: '#f0fdfa',
+                            100: '#ccf2ed',
+                            200: '#99e5db',
+                            300: '#66d8c9',
+                            400: '#33cbb7',
+                            500: '#069687',
+                            600: '#057870',
+                            700: '#045a59',
+                            800: '#034e46',
+                            900: '#023c37',
                         }
                     },
                     boxShadow: {
@@ -51,13 +54,16 @@
 <body class="bg-gray-50">
     <div x-data="{
         sidebarOpen: false,
-        sidebarCollapsed: false,
+        sidebarCollapsed: localStorage.getItem('sidebarCollapsed') === 'true',
         isMobile: window.innerWidth < 768,
         init() {
             this.$watch('isMobile', (value) => {
                 if (value) {
                     this.sidebarOpen = false;
                 }
+            });
+            this.$watch('sidebarCollapsed', (value) => {
+                localStorage.setItem('sidebarCollapsed', value);
             });
             window.addEventListener('resize', () => {
                 this.isMobile = window.innerWidth < 768;
@@ -67,7 +73,7 @@
         @include('layouts.components.sidebar')
 
         <!-- Main Content -->
-        <div class="flex flex-col min-h-screen transition-all duration-300"
+        <div class="flex flex-col min-h-screen transition-all duration-300 ease-in-out"
             :class="{ 'ml-72': !sidebarCollapsed && !isMobile, 'ml-20': sidebarCollapsed && !isMobile }">
             @include('layouts.components.navbar')
 
@@ -89,6 +95,18 @@
             if (window.innerWidth < 768) {
                 this.document.querySelector('[x-data]').__x.$data.sidebarOpen = false;
             }
+        });
+    </script>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("input[type=text][id=tanggal_lahir]", {
+                dateFormat: "Y-m-d",
+                allowInput: true,
+            });
         });
     </script>
 </body>

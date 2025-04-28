@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Pendaftaranonline;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PendaftarController extends Controller
 {
@@ -15,38 +18,8 @@ class PendaftarController extends Controller
 
     public function create()
     {
-        return view('pendaftar.create');
-    }
-
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'nisn' => 'nullable|string|max:11',
-            'nama_lengkap' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|in:L,P',
-            'tempat_lahir' => 'nullable|string|max:255',
-            'tanggal_lahir' => 'nullable|date',
-            'anak_ke' => 'nullable|integer|min:1',
-            'jumlah_saudara' => 'nullable|integer|min:0',
-            'alamat' => 'nullable|string',
-            'kode_pos' => 'nullable|string|max:5',
-            'no_kk' => 'nullable|string|max:16',
-            'nik_ayah' => 'nullable|string|max:16',
-            'nama_ayah' => 'nullable|string|max:255',
-            'pendidikan_ayah' => 'nullable|string|max:255',
-            'pekerjaan_ayah' => 'nullable|string|max:255',
-            'nik_ibu' => 'nullable|string|max:16',
-            'nama_ibu' => 'nullable|string|max:255',
-            'pendidikan_ibu' => 'nullable|string|max:255',
-            'pekerjaan_ibu' => 'nullable|string|max:255',
-            'no_hp' => 'nullable|string|max:15',
-            'asal_sekolah' => 'nullable|string|max:255',
-        ]);
-
-        Pendaftaranonline::create($validated);
-
-        return redirect()->route('pendaftar.index')
-            ->with('success', 'Data pendaftar berhasil ditambahkan.');
+        $user = Auth::user();
+        return view('pendaftar.create', compact('user'));
     }
 
     public function show(Pendaftaranonline $pendaftar)
@@ -59,35 +32,36 @@ class PendaftarController extends Controller
         return view('pendaftar.edit', compact('pendaftar'));
     }
 
-    public function update(Request $request, Pendaftaranonline $pendaftar)
+    public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $validated = $request->validate([
-            'nisn' => 'nullable|string|max:11',
-            'nama_lengkap' => 'required|string|max:255',
+            'nisn' => 'nullable|digits:10|unique:users,nisn,' . $id,
+            'nama_lengkap' => 'required|string|min:3',
             'jenis_kelamin' => 'required|in:L,P',
-            'tempat_lahir' => 'nullable|string|max:255',
-            'tanggal_lahir' => 'nullable|date',
-            'anak_ke' => 'nullable|integer|min:1',
-            'jumlah_saudara' => 'nullable|integer|min:0',
-            'alamat' => 'nullable|string',
-            'kode_pos' => 'nullable|string|max:5',
-            'no_kk' => 'nullable|string|max:16',
-            'nik_ayah' => 'nullable|string|max:16',
-            'nama_ayah' => 'nullable|string|max:255',
-            'pendidikan_ayah' => 'nullable|string|max:255',
-            'pekerjaan_ayah' => 'nullable|string|max:255',
-            'nik_ibu' => 'nullable|string|max:16',
-            'nama_ibu' => 'nullable|string|max:255',
-            'pendidikan_ibu' => 'nullable|string|max:255',
-            'pekerjaan_ibu' => 'nullable|string|max:255',
-            'no_hp' => 'nullable|string|max:15',
-            'asal_sekolah' => 'nullable|string|max:255',
+            'tempat_lahir' => 'required|string|min:3',
+            'tanggal_lahir' => 'required|date|before_or_equal:today',
+            'anak_ke' => 'required|integer|min:1|max:20',
+            'jumlah_saudara' => 'required|integer|min:0|max:20',
+            'alamat' => 'required|string|min:10',
+            'kode_pos' => 'required|digits:5',
+            'no_kk' => 'required|digits:16',
+            'nik_ayah' => 'required|digits:16',
+            'nama_ayah' => 'required|string|min:3',
+            'pendidikan_ayah' => 'required|in:SD,SMP,SMA,D3,S1,S2,S3',
+            'pekerjaan_ayah' => 'required|string|min:3',
+            'nik_ibu' => 'required|digits:16',
+            'nama_ibu' => 'required|string|min:3',
+            'pendidikan_ibu' => 'required|in:SD,SMP,SMA,D3,S1,S2,S3',
+            'pekerjaan_ibu' => 'required|string|min:3',
+            'no_hp' => 'required|regex:/^(\+62|62|0)8[1-9][0-9]{6,9}$/',
+            'asal_sekolah' => 'required|string|min:3',
         ]);
 
-        $pendaftar->update($validated);
+        $user->update($validated);
 
-        return redirect()->route('pendaftar.index')
-            ->with('success', 'Data pendaftar berhasil diperbarui.');
+        return redirect()->route('dashboard')->with('success', 'Data pendaftar berhasil diperbarui.');
     }
 
     public function destroy(Pendaftaranonline $pendaftar)
@@ -96,5 +70,17 @@ class PendaftarController extends Controller
 
         return redirect()->route('pendaftar.index')
             ->with('success', 'Data pendaftar berhasil dihapus.');
+    }
+
+    public function cetakPdf(Pendaftaranonline $pendaftar)
+    {
+        // Pastikan user yang login adalah pemilik data
+        if (auth()->user()->no_register !== $pendaftar->no_register) {
+            abort(403);
+        }
+
+        $pdf = Pdf::loadView('pendaftar.pdf', compact('pendaftar'));
+
+        return $pdf->stream('formulir-pendaftaran-' . $pendaftar->no_register . '.pdf');
     }
 }
