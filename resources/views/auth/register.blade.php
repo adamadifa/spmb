@@ -41,6 +41,86 @@
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23034646' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
+        /* Background image with overlay */
+        .bg-image-overlay {
+            background-image: url('/assets/image/bgalamin.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+            inset: 0;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* Student model positioning and animation */
+        .student-model {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            z-index: 5;
+            height: 85%;
+            filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.3));
+            animation: studentFloat 8s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        @keyframes studentAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes studentFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-7px) rotate(-1deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        /* Welcome box positioning */
+        .welcome-box-container {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            z-index: 10;
+            width: 50%;
+        }
+
+        .welcome-content {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .welcome-box {
+            backdrop-filter: blur(8px);
+            background-color: rgba(3, 78, 70, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
         /* Error styles */
         .input-error {
             border-color: #ef4444 !important;
@@ -62,18 +142,197 @@
         .error-icon {
             margin-right: 0.5rem;
         }
+
+        /* Animated Background Styles */
+        .animated-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .animated-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(20px);
+            animation: float 15s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            right: -100px;
+            animation-delay: 2s;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            top: 40%;
+            right: 10%;
+            animation-delay: 5s;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .shape-4 {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+
+            25% {
+                transform: translateY(-10px) translateX(10px) scale(1.02);
+            }
+
+            50% {
+                transform: translateY(15px) translateX(-15px) scale(0.98);
+            }
+
+            75% {
+                transform: translateY(5px) translateX(5px) scale(1.01);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+        }
+
+        /* Add shine effect */
+        .shine-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.03) 50%, transparent 60%);
+            background-size: 200% 200%;
+            animation: shine 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Animated dots grid */
+        .dots-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px);
+            background-size: 30px 30px;
+            background-position: 0 0;
+            animation: dotsFloat 60s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes dotsFloat {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 30px 30px;
+            }
+        }
+
+        /* Animation for the welcome content */
+        .welcome-content {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animated decorative dots */
+        .decorative-dots {
+            animation: pulseDots 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseDots {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 0.9;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-register-pattern">
-    <div class="min-h-screen flex">
+    <div class="min-h-screen flex relative">
         <!-- Left Column - Background & Content -->
-        <div class="hidden lg:flex lg:w-2/3 bg-gradient-to-br from-primary-dark to-primary-light relative">
+        <div
+            class="hidden lg:flex lg:w-2/3 bg-gradient-to-br from-primary-dark to-primary-light relative overflow-hidden">
+            <!-- Logo Left with Text -->
+            <div class="absolute left-4 top-4 flex items-center space-x-2 z-20">
+                <img src="{{ asset('assets/image/logo.png') }}" alt="Logo Left" class="h-40 w-auto">
+                <div class="text-white font-semibold leading-tight text-lg">
+                    PESANTREN<br>
+                    PERSATUAN ISLAM 80 AL AMIN<br>
+                    SINDANGKASIH - CIAMIS
+                </div>
+            </div>
+
+            <!-- Background Image with Overlay -->
+            <div class="bg-image-overlay"></div>
+
+            <!-- Animated background elements -->
+            <div class="animated-bg">
+                <div class="animated-shape shape-1"></div>
+                <div class="animated-shape shape-2"></div>
+                <div class="animated-shape shape-3"></div>
+                <div class="animated-shape shape-4"></div>
+                <div class="dots-grid"></div>
+                <div class="shine-effect"></div>
+            </div>
+
             <div class="absolute inset-0">
-                <div class="absolute inset-0 bg-black opacity-20"></div>
+                <div class="absolute inset-0 bg-primary-dark opacity-40"></div>
                 <!-- Decorative Pattern -->
                 <div class="absolute right-0 top-0 mr-16 mt-16">
-                    <div class="flex space-x-1">
+                    <div class="flex space-x-1 decorative-dots">
                         @for ($i = 0; $i < 3; $i++)
                             <div class="h-2 w-2 rounded-full bg-white opacity-60"></div>
                         @endfor
@@ -81,14 +340,18 @@
                 </div>
             </div>
 
+            <!-- Student Model Image -->
+            <img src="https://persis80alamin.com/assets/images/model1.png" alt="Student Model" class="student-model">
+
             <!-- Welcome Content -->
-            <div class="relative w-full flex items-center justify-center p-16">
-                <div class="w-full max-w-xl">
-                    <div class="backdrop-blur-sm bg-white/10 rounded-2xl p-8">
-                        <h1 class="text-4xl font-bold text-white mb-6">Bergabung dengan SPMB</h1>
-                        <p class="text-lg text-white/90">
-                            Daftar sekarang untuk menjadi bagian dari kami. Bersama kita wujudkan masa depan yang lebih
-                            cerah.
+            <div class="welcome-box-container">
+                <div class="welcome-content">
+                    <div class="welcome-box">
+                        <h1 class="text-4xl font-bold text-white mb-6">AYO BERGABUNG BERSAMA PESANTREN PERSIS 80 AL AMIN
+                        </h1>
+                        <p class="text-lg text-white mb-4">
+                            Daftar sekarang untuk menjadi bagian dari kami. Bersama kita wujudkan generasi muda yang
+                            Berakhlak Mulia, Tafaquh Fiddien, Beprestasi
                         </p>
                     </div>
                 </div>
@@ -96,19 +359,15 @@
         </div>
 
         <!-- Right Column - Register Form -->
-        <div class="w-full lg:w-1/3 flex items-center justify-center p-8 lg:p-16 bg-white">
+        <div class="w-full lg:w-1/3 flex items-center justify-center p-8 lg:p-16 bg-white relative">
             <div class="w-full max-w-md space-y-8">
                 <!-- Logo -->
                 <div class="text-center">
-                    <div
-                        class="mx-auto w-16 h-16 bg-gradient-to-r from-primary-dark to-primary-light rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                        </svg>
+                    <div class="mx-auto w-24 h-24 rounded-full flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset('assets/image/logo.png') }}" alt="Logo Right" class="h-full w-auto">
                     </div>
-                    <h2 class="mt-6 text-3xl font-bold text-gray-900">Buat Akun Baru</h2>
-                    <p class="mt-2 text-sm text-gray-600">Isi data diri Anda untuk mendaftar</p>
+                    <h2 class="mt-2 text-3xl font-bold text-gray-900">Buat Akun Baru</h2>
+                    <p class="mt-1 text-sm text-gray-600">Isi data diri Anda untuk mendaftar</p>
                 </div>
 
                 <!-- Register Form -->
