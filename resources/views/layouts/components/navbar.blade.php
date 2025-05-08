@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<header class="bg-white shadow-sm sticky top-0 z-50">
+<header class="bg-white shadow-sm sticky top-0 z-30">
     <div class="flex items-center justify-between h-16 px-6">
         <!-- Mobile Menu Button -->
         <button @click="sidebarOpen = !sidebarOpen"

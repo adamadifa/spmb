@@ -54,20 +54,35 @@
 <body class="bg-gray-50">
     <div x-data="{
         sidebarOpen: false,
-        sidebarCollapsed: localStorage.getItem('sidebarCollapsed') === 'true',
+        sidebarCollapsed: false,
         isMobile: window.innerWidth < 768,
         init() {
+            // Load sidebar state from localStorage
+            const savedState = localStorage.getItem('sidebarCollapsed');
+            if (savedState !== null) {
+                this.sidebarCollapsed = savedState === 'true';
+            }
+    
             this.$watch('isMobile', (value) => {
                 if (value) {
                     this.sidebarOpen = false;
                 }
             });
+    
             this.$watch('sidebarCollapsed', (value) => {
                 localStorage.setItem('sidebarCollapsed', value);
             });
+    
             window.addEventListener('resize', () => {
                 this.isMobile = window.innerWidth < 768;
             });
+        },
+        toggleSidebar() {
+            if (this.isMobile) {
+                this.sidebarOpen = !this.sidebarOpen;
+            } else {
+                this.sidebarCollapsed = !this.sidebarCollapsed;
+            }
         }
     }" class="min-h-screen">
         @include('layouts.components.sidebar')
@@ -93,7 +108,8 @@
         // Auto-hide sidebar on mobile
         window.addEventListener('resize', function() {
             if (window.innerWidth < 768) {
-                this.document.querySelector('[x-data]').__x.$data.sidebarOpen = false;
+                const alpineData = this.document.querySelector('[x-data]').__x.$data;
+                alpineData.sidebarOpen = false;
             }
         });
     </script>

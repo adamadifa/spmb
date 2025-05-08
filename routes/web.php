@@ -27,8 +27,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('pendaftar', PendaftarController::class);
-    Route::get('/pendaftar/{pendaftar}/cetak-pdf', [PendaftarController::class, 'cetakPdf'])->name('pendaftar.cetak-pdf');
+    Route::get('/pendaftar', [PendaftarController::class, 'index'])->name('pendaftar.index');
+    Route::get('/pendaftar/create', [PendaftarController::class, 'create'])->name('pendaftar.create');
+    Route::post('/pendaftar', [PendaftarController::class, 'store'])->name('pendaftar.store');
+    Route::get('/pendaftar/{no_register}', [PendaftarController::class, 'show'])->name('pendaftar.show');
+    Route::get('/pendaftar/{no_register}/edit', [PendaftarController::class, 'edit'])->name('pendaftar.edit');
+    Route::put('/pendaftar/{no_register}', [PendaftarController::class, 'update'])->name('pendaftar.update');
+    Route::delete('/pendaftar/{no_register}', [PendaftarController::class, 'destroy'])->name('pendaftar.destroy');
+    Route::get('/pendaftar/{no_register}/cetak-pdf', [PendaftarController::class, 'cetakPdf'])->name('pendaftar.cetak-pdf');
 
     // Route untuk fitur pembayaran
     Route::middleware(['auth'])->group(function () {
