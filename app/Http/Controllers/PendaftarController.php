@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\JenisDokumen;
+use App\Models\DokumenPendaftaran;
+use Illuminate\Support\Facades\Storage;
 
 class PendaftarController extends Controller
 {
@@ -94,5 +97,50 @@ class PendaftarController extends Controller
         $pdf = Pdf::loadView('pendaftar.pdf', compact('pendaftar'));
 
         return $pdf->stream('formulir-pendaftaran-' . $pendaftar->no_register . '.pdf');
+    }
+
+    public function uploadDokumen()
+    {
+        $jenisDokumen = JenisDokumen::all();
+        $dokumenTerupload = DokumenPendaftaran::where('no_register', auth()->user()->no_register)
+            ->get()
+            ->keyBy('kode_dokumen');
+
+        return view('pendaftar.upload-dokumen', compact('jenisDokumen', 'dokumenTerupload'));
+    }
+
+    public function storeDokumen(Request $request)
+    {
+        $request->validate([
+            'kode_dokumen' => 'required|exists:pendaftaran_jenis_dokumen,kode_dokumen',
+            'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048'
+        ]);
+
+        $pendaftar = auth()->user();
+        $jenisDokumen = JenisDokumen::findOrFail($request->kode_dokumen);
+
+        // Hapus file lama jika ada
+        $dokumenLama = DokumenPendaftaran::where('no_register', $pendaftar->no_register)
+            ->where('kode_dokumen', $jenisDokumen->kode_dokumen)
+            ->first();
+
+        //dd($dokumenLama);
+        if ($dokumenLama) {
+            Storage::disk('public')->delete('dokumen-pendaftar/' . $dokumenLama->nama_file);
+            $dokumenLama->delete();
+        }
+
+        // Upload file baru
+        $file = $request->file('file');
+        $namaFile = $pendaftar->no_register . '_' . $jenisDokumen->kode_dokumen . '_' . str_replace(' ', '_', $jenisDokumen->nama_dokumen) . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('dokumen-pendaftar', $namaFile, 'public');
+
+        DokumenPendaftaran::create([
+            'no_register' => $pendaftar->no_register,
+            'kode_dokumen' => $jenisDokumen->kode_dokumen,
+            'nama_file' => $namaFile
+        ]);
+
+        return redirect()->back()->with('success', 'Dokumen berhasil diupload');
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pendaftaran_online_bayar', function (Blueprint $table) {
             $table->id('id');
-            $table->string('no_register');
+            $table->char('no_register', 10);
             $table->date('tanggal_pembayaran');
             $table->decimal('jumlah_pembayaran', 12, 2);
             $table->enum('metode_pembayaran', ['transfer', 'tunai']);

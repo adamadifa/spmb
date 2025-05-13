@@ -36,6 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pendaftar/{no_register}', [PendaftarController::class, 'destroy'])->name('pendaftar.destroy');
     Route::get('/pendaftar/{no_register}/cetak-pdf', [PendaftarController::class, 'cetakPdf'])->name('pendaftar.cetak-pdf');
 
+    // Route untuk upload dokumen
+    Route::get('/upload-dokumen', [PendaftarController::class, 'uploadDokumen'])->name('pendaftar.upload-dokumen');
+    Route::post('/upload-dokumen', [PendaftarController::class, 'storeDokumen'])->name('pendaftar.store-dokumen');
+
     // Route untuk fitur pembayaran
     Route::middleware(['auth'])->group(function () {
         Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');

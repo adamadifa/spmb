@@ -92,6 +92,23 @@
                 x-transition:leave="transition ease-in-out duration-300" x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0" class="ml-3">Pembayaran</span>
         </a>
+        <a href="{{ route('pendaftar.upload-dokumen') }}"
+            class="flex items-center px-4 py-2.5 text-sm transition-colors duration-200"
+            :class="{
+                'bg-primary-700 text-white': '{{ request()->routeIs('pendaftar.upload-dokumen') }}',
+                'text-primary-100 hover:bg-primary-700 hover:text-white': !
+                    '{{ request()->routeIs('pendaftar.upload-dokumen') }}'
+            }">
+            <i data-lucide="upload" class="w-5 h-5"
+                :class="{
+                    'text-white': '{{ request()->routeIs('pendaftar.upload-dokumen') }}',
+                    'text-primary-300': !'{{ request()->routeIs('pendaftar.upload-dokumen') }}'
+                }"></i>
+            <span x-show="!sidebarCollapsed || isMobile" x-transition:enter="transition ease-in-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in-out duration-300" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0" class="ml-3">Upload Dokumen</span>
+        </a>
     </nav>
 </aside>
 
