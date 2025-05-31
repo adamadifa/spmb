@@ -260,6 +260,131 @@
                                     @enderror
                                 </div>
 
+                                <!-- Provinsi -->
+                                <div>
+                                    <label for="provinsi_id"
+                                        class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+                                        Provinsi <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative rounded-md shadow-sm">
+                                        <div
+                                            class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                            <i data-lucide="map-pin" class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"></i>
+                                        </div>
+                                        <select name="provinsi_id" id="provinsi_id"
+                                            x-model="formData.provinsi_id" @change="loadKabupaten(); validateField('provinsi_id')"
+                                            :class="{
+                                                'border-red-600': errors.provinsi_id,
+                                                'border-green-500': !errors.provinsi_id && formData.provinsi_id
+                                            }"
+                                            class="provinsi-select pl-10 sm:pl-12 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-0 py-2.5 sm:py-3 text-sm">
+                                            <option value="" disabled selected>Pilih Provinsi</option>
+                                            @foreach($provinces as $province)
+                                            <option value="{{ $province->id }}" {{ (old('provinsi_id') == $province->id || ($user->provinsi_id ?? '') == $province->id) ? 'selected' : '' }}>
+                                                {{ $province->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <template x-if="errors.provinsi_id">
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600" x-text="errors.provinsi_id"></p>
+                                    </template>
+                                    @error('provinsi_id')
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <!-- Kabupaten/Kota -->
+                                <div>
+                                    <label for="kabupaten_id"
+                                        class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+                                        Kabupaten/Kota <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative rounded-md shadow-sm">
+                                        <div
+                                            class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                            <i data-lucide="landmark" class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"></i>
+                                        </div>
+                                        <select name="kabupaten_id" id="kabupaten_id"
+                                            x-model="formData.kabupaten_id" @change="loadKecamatan(); validateField('kabupaten_id')"
+                                            :class="{
+                                                'border-red-600': errors.kabupaten_id,
+                                                'border-green-500': !errors.kabupaten_id && formData.kabupaten_id
+                                            }"
+                                            :disabled="!formData.provinsi_id"
+                                            class="kabupaten-select pl-10 sm:pl-12 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-0 py-2.5 sm:py-3 text-sm">
+                                            <option value="" disabled selected>Pilih Kabupaten/Kota</option>
+                                        </select>
+                                    </div>
+                                    <template x-if="errors.kabupaten_id">
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600" x-text="errors.kabupaten_id"></p>
+                                    </template>
+                                    @error('kabupaten_id')
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <!-- Kecamatan -->
+                                <div>
+                                    <label for="kecamatan_id"
+                                        class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+                                        Kecamatan <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative rounded-md shadow-sm">
+                                        <div
+                                            class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                            <i data-lucide="map" class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"></i>
+                                        </div>
+                                        <select name="kecamatan_id" id="kecamatan_id"
+                                            x-model="formData.kecamatan_id" @change="loadDesa(); validateField('kecamatan_id')"
+                                            :class="{
+                                                'border-red-600': errors.kecamatan_id,
+                                                'border-green-500': !errors.kecamatan_id && formData.kecamatan_id
+                                            }"
+                                            :disabled="!formData.kabupaten_id"
+                                            class="kecamatan-select pl-10 sm:pl-12 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-0 py-2.5 sm:py-3 text-sm">
+                                            <option value="" disabled selected>Pilih Kecamatan</option>
+                                        </select>
+                                    </div>
+                                    <template x-if="errors.kecamatan_id">
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600" x-text="errors.kecamatan_id"></p>
+                                    </template>
+                                    @error('kecamatan_id')
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <!-- Desa/Kelurahan -->
+                                <div>
+                                    <label for="desa_id"
+                                        class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+                                        Desa/Kelurahan <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative rounded-md shadow-sm">
+                                        <div
+                                            class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                            <i data-lucide="home" class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"></i>
+                                        </div>
+                                        <select name="desa_id" id="desa_id"
+                                            x-model="formData.desa_id" @change="validateField('desa_id')"
+                                            :class="{
+                                                'border-red-600': errors.desa_id,
+                                                'border-green-500': !errors.desa_id && formData.desa_id
+                                            }"
+                                            :disabled="!formData.kecamatan_id"
+                                            class="desa-select pl-10 sm:pl-12 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-0 py-2.5 sm:py-3 text-sm">
+                                            <option value="" disabled selected>Pilih Desa/Kelurahan</option>
+                                        </select>
+                                    </div>
+                                    <template x-if="errors.desa_id">
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600" x-text="errors.desa_id"></p>
+                                    </template>
+                                    @error('desa_id')
+                                        <p class="mt-1 sm:mt-2 text-xs sm:text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <!-- Alamat Lengkap -->
                                 <div class="md:col-span-2">
                                     <label for="alamat"
                                         class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Alamat
@@ -678,6 +803,64 @@
     <!-- Flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <style>
+        /* Select2 styling */
+        .select2-container--open {
+            z-index: 9999;
+        }
+        
+        .select2-container {
+            display: block;
+            width: 100% !important;
+        }
+        
+        .select2-container--default .select2-selection--single {
+            height: 42px;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background-color: white;
+            padding-left: 45px;
+        }
+        
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #000;
+            line-height: 42px;
+        }
+        
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 40px;
+        }
+        
+        .select2-dropdown {
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+            background-color: #2563eb;
+        }
+        
+        .select2-container--default.select2-container--disabled .select2-selection--single {
+            background-color: #f9fafb;
+            opacity: 0.7;
+        }
+        
+        /* Error and success states */
+        .border-red-600 ~ .select2-container--default .select2-selection--single {
+            border-color: #dc2626 !important;
+        }
+        
+        .border-green-500 ~ .select2-container--default .select2-selection--single {
+            border-color: #10b981 !important;
+        }
+    </style>
 
     <style>
         /* Hapus outline dan ring saat focus */
@@ -719,6 +902,10 @@
                     nisn: '{{ $user->nisn ?? old('nisn') }}',
                     nama_lengkap: '{{ $user->nama_lengkap ?? old('nama_lengkap') }}',
                     jenis_kelamin: '{{ $user->jenis_kelamin ?? old('jenis_kelamin') }}',
+                    provinsi_id: '{{ $user->provinsi_id ?? old('provinsi_id') }}',
+                    kabupaten_id: '{{ $user->kabupaten_id ?? old('kabupaten_id') }}',
+                    kecamatan_id: '{{ $user->kecamatan_id ?? old('kecamatan_id') }}',
+                    desa_id: '{{ $user->desa_id ?? old('desa_id') }}',
                     tempat_lahir: '{{ $user->tempat_lahir ?? old('tempat_lahir') }}',
                     tanggal_lahir: '{{ $user->tanggal_lahir ?? old('tanggal_lahir') }}',
                     anak_ke: '{{ $user->anak_ke ?? old('anak_ke') }}',
@@ -739,14 +926,44 @@
                 },
                 errors: {},
                 init() {
-                    // Inisialisasi errors object
+                    // Definisikan fields yang perlu divalidasi
                     const fields = [
-                        'nisn', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir',
-                        'anak_ke', 'jumlah_saudara', 'alamat', 'kode_pos', 'no_kk',
+                        'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir',
+                        'anak_ke', 'jumlah_saudara', 'provinsi_id', 'kabupaten_id', 
+                        'kecamatan_id', 'desa_id', 'alamat', 'kode_pos', 'no_kk',
                         'nik_ayah', 'nama_ayah', 'pendidikan_ayah', 'pekerjaan_ayah',
                         'nik_ibu', 'nama_ibu', 'pendidikan_ibu', 'pekerjaan_ibu',
                         'no_hp', 'asal_sekolah'
                     ];
+                    
+                    // Initialize Select2 for dropdowns
+                    $(document).ready(function() {
+                        // Initialize provinsi select2
+                        $('.provinsi-select').select2({
+                            placeholder: 'Pilih Provinsi',
+                            width: '100%',
+                            dropdownParent: $('body'),
+                        });
+                        
+                        // Handle provinsi change
+                        $('.provinsi-select').on('select2:select', function(e) {
+                            const value = e.params.data.id;
+                            // Trigger Alpine.js model update
+                            document.getElementById('provinsi_id').value = value;
+                            document.getElementById('provinsi_id').dispatchEvent(new Event('change', { bubbles: true }));
+                        });
+                        
+                        // Initialize other dropdowns if values exist
+                        if (this.formData.provinsi_id) {
+                            this.loadKabupaten();
+                            if (this.formData.kabupaten_id) {
+                                this.loadKecamatan();
+                                if (this.formData.kecamatan_id) {
+                                    this.loadDesa();
+                                }
+                            }
+                        }
+                    }.bind(this));
                     fields.forEach(field => this.errors[field] = '');
 
                     // Inisialisasi date picker
@@ -769,16 +986,43 @@
 
                     // Validasi awal untuk semua field
                     fields.forEach(field => this.validateField(field));
+                    
+                    // Additional Select2 CSS fix for mobile
+                    document.querySelector('head').insertAdjacentHTML('beforeend', `
+                        <style>
+                            @media (max-width: 768px) {
+                                .select2-container {
+                                    width: 100% !important;
+                                }
+                            }
+                        </style>
+                    `);
                 },
                 validateField(field) {
                     this.errors[field] = '';
 
                     switch (field) {
-                        case 'nisn':
-                            if (!this.formData.nisn) {
-                                this.errors.nisn = 'NISN wajib diisi';
-                            } else if (!/^\d{10}$/.test(this.formData.nisn)) {
-                                this.errors.nisn = 'NISN harus 10 digit angka';
+                        case 'provinsi_id':
+                            if (!this.formData.provinsi_id) {
+                                this.errors.provinsi_id = 'Provinsi wajib dipilih';
+                            }
+                            break;
+                            
+                        case 'kabupaten_id':
+                            if (!this.formData.kabupaten_id) {
+                                this.errors.kabupaten_id = 'Kabupaten/Kota wajib dipilih';
+                            }
+                            break;
+                            
+                        case 'kecamatan_id':
+                            if (!this.formData.kecamatan_id) {
+                                this.errors.kecamatan_id = 'Kecamatan wajib dipilih';
+                            }
+                            break;
+                            
+                        case 'desa_id':
+                            if (!this.formData.desa_id) {
+                                this.errors.desa_id = 'Desa/Kelurahan wajib dipilih';
                             }
                             break;
 
@@ -936,11 +1180,136 @@
                             break;
                     }
                 },
+                // Load Kabupaten/Kota berdasarkan Provinsi yang dipilih
+                loadKabupaten() {
+                    if (!this.formData.provinsi_id) return;
+                    
+                    fetch(`/api/provinces/${this.formData.provinsi_id}/regencies`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Populate select kabupaten
+                            const selectKabupaten = document.getElementById('kabupaten_id');
+                            selectKabupaten.innerHTML = '<option value="" disabled selected>Pilih Kabupaten/Kota</option>';
+                            
+                            data.forEach(kabupaten => {
+                                const option = document.createElement('option');
+                                option.value = kabupaten.id;
+                                option.textContent = kabupaten.name;
+                                option.selected = kabupaten.id == '{{ $user->kabupaten_id ?? old('kabupaten_id') }}';
+                                selectKabupaten.appendChild(option);
+                            });
+                            
+                            // Reset kecamatan dan desa
+                            this.formData.kecamatan_id = '';
+                            this.formData.desa_id = '';
+                            document.getElementById('kecamatan_id').innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
+                            document.getElementById('desa_id').innerHTML = '<option value="" disabled selected>Pilih Desa/Kelurahan</option>';
+                            
+                            // Initialize kabupaten select2
+                            $('.kabupaten-select').select2({
+                                placeholder: 'Pilih Kabupaten/Kota',
+                                width: '100%',
+                                dropdownParent: $('body'),
+                            });
+                            
+                            // Handle kabupaten change
+                            $('.kabupaten-select').on('select2:select', function(e) {
+                                const value = e.params.data.id;
+                                // Trigger Alpine.js model update
+                                document.getElementById('kabupaten_id').value = value;
+                                document.getElementById('kabupaten_id').dispatchEvent(new Event('change', { bubbles: true }));
+                            });
+                        })
+                        .catch(error => console.error('Error:', error));
+                },
+                
+                
+                // Load Kecamatan berdasarkan Kabupaten yang dipilih
+                loadKecamatan() {
+                    if (!this.formData.kabupaten_id) return;
+                    
+                    fetch(`/api/regencies/${this.formData.kabupaten_id}/districts`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Populate select kecamatan
+                            const selectKecamatan = document.getElementById('kecamatan_id');
+                            selectKecamatan.innerHTML = '<option value="" disabled selected>Pilih Kecamatan</option>';
+                            
+                            data.forEach(kecamatan => {
+                                const option = document.createElement('option');
+                                option.value = kecamatan.id;
+                                option.textContent = kecamatan.name;
+                                option.selected = kecamatan.id == '{{ $user->kecamatan_id ?? old('kecamatan_id') }}';
+                                selectKecamatan.appendChild(option);
+                            });
+                            
+                            // Reset desa
+                            this.formData.desa_id = '';
+                            document.getElementById('desa_id').innerHTML = '<option value="" disabled selected>Pilih Desa/Kelurahan</option>';
+                            
+                            // Initialize kecamatan select2
+                            $('.kecamatan-select').select2({
+                                placeholder: 'Pilih Kecamatan',
+                                width: '100%',
+                                dropdownParent: $('body'),
+                            });
+                            
+                            // Handle kecamatan change
+                            $('.kecamatan-select').on('select2:select', function(e) {
+                                const value = e.params.data.id;
+                                // Trigger Alpine.js model update
+                                document.getElementById('kecamatan_id').value = value;
+                                document.getElementById('kecamatan_id').dispatchEvent(new Event('change', { bubbles: true }));
+                            });
+                        })
+                        .catch(error => console.error('Error:', error));
+                },
+                
+                
+                // Load Desa berdasarkan Kecamatan yang dipilih
+                loadDesa() {
+                    if (!this.formData.kecamatan_id) return;
+                    
+                    fetch(`/api/districts/${this.formData.kecamatan_id}/villages`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Populate select desa
+                            const selectDesa = document.getElementById('desa_id');
+                            selectDesa.innerHTML = '<option value="" disabled selected>Pilih Desa/Kelurahan</option>';
+                            
+                            data.forEach(desa => {
+                                const option = document.createElement('option');
+                                option.value = desa.id;
+                                option.textContent = desa.name;
+                                option.selected = desa.id == '{{ $user->desa_id ?? old('desa_id') }}';
+                                selectDesa.appendChild(option);
+                            });
+                            
+                            // Initialize desa select2
+                            $('.desa-select').select2({
+                                placeholder: 'Pilih Desa/Kelurahan',
+                                width: '100%',
+                                dropdownParent: $('body'),
+                            });
+                            
+                            // Handle desa change
+                            $('.desa-select').on('select2:select', function(e) {
+                                const value = e.params.data.id;
+                                // Trigger Alpine.js model update
+                                document.getElementById('desa_id').value = value;
+                                document.getElementById('desa_id').dispatchEvent(new Event('change', { bubbles: true }));
+                            });
+                        })
+                        .catch(error => console.error('Error:', error));
+                },
+                
+                
                 validate() {
                     // Validasi semua field
                     const fields = [
-                        'nisn', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir',
-                        'anak_ke', 'jumlah_saudara', 'alamat', 'kode_pos', 'no_kk',
+                        'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir',
+                        'anak_ke', 'jumlah_saudara', 'provinsi_id', 'kabupaten_id', 
+                        'kecamatan_id', 'desa_id', 'alamat', 'kode_pos', 'no_kk',
                         'nik_ayah', 'nama_ayah', 'pendidikan_ayah', 'pekerjaan_ayah',
                         'nik_ibu', 'nama_ibu', 'pendidikan_ibu', 'pekerjaan_ibu',
                         'no_hp', 'asal_sekolah'

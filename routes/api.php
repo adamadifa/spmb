@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Location API Routes
+Route::get('/provinces', 'App\Http\Controllers\Api\LocationController@getProvinces');
+Route::get('/provinces/{id}/regencies', 'App\Http\Controllers\Api\LocationController@getRegencies');
+Route::get('/regencies/{id}/districts', 'App\Http\Controllers\Api\LocationController@getDistricts');
+Route::get('/districts/{id}/villages', 'App\Http\Controllers\Api\LocationController@getVillages');

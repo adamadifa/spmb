@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\JenisDokumen;
 use App\Models\DokumenPendaftaran;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
 
 class PendaftarController extends Controller
 {
@@ -24,7 +28,8 @@ class PendaftarController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('pendaftar.create', compact('user'));
+        $provinces = Province::orderBy('name')->get();
+        return view('pendaftar.create', compact('user', 'provinces'));
     }
 
     public function show($no_register)
